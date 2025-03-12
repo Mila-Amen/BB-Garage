@@ -1,18 +1,26 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../index.css"; // Custom styles
+import "../styles/navbar.css"; // Custom styles
 
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
-
+  const location = useLocation(); // Get the current route
+  const isServicePage = location.pathname === "/services"; // Check if we are on service page
+  console.log(isServicePage);
   return (
     <nav className="navbar navbar-expand-lg navbar-dark fixed-top">
       <div className="container">
         {/* Logo */}
         <NavLink to="/" className="navbar-brand">
-          <img src="BBGarageLogo.png" width="300" alt="Logo" />
+          <img
+            src="BBGarageLogo.png"
+            style={{ width: isServicePage ? "150px" : "600px" }}
+          // Automatically adjust size
+            alt="Logo"
+          />
         </NavLink>
+        
 
         {/* Hamburger Button for Mobile */}
         <button
@@ -23,9 +31,9 @@ export default function Nav() {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        {/* Nav Links - Adjusted for Right Alignment */}
+        {/* Nav Links */}
         <div className={`collapse navbar-collapse ${isOpen ? "show" : ""}`} id="navbarNav">
-          <ul className="navbar-nav ms-auto text-end"> {/* Move to Right */}
+          <ul className="navbar-nav ms-auto text-end">
             <li className="nav-item">
               <NavLink to="/" className="nav-link" onClick={() => setIsOpen(false)}>Home</NavLink>
             </li>
@@ -45,5 +53,7 @@ export default function Nav() {
         </div>
       </div>
     </nav>
+  
   );
+  
 }

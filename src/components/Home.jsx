@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "../styles/home.css"
 
 function Home() {
   const [index, setIndex] = useState(0);
